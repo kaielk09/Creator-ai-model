@@ -1,17 +1,15 @@
-# Creator AI Model
+# PurpleCreator
 
-Podstawowa strona projektu Creator AI Model.
+Strona startowa PurpleCreator z fioletowo-czarnym motywem oraz widokami logowania i rejestracji.
 
-## Podgląd lokalny
+## Uruchomienie
 
-Otwórz plik `index.html` w przeglądarce.
+Otwórz `index.html` w przeglądarce albo opublikuj repozytorium przez GitHub Pages.
 
-## Publikacja przez GitHub Pages
+## Ważne: system kont
 
-1. Wejdź w **Settings** repozytorium.
-2. Otwórz **Pages**.
-3. W sekcji **Build and deployment** wybierz **Deploy from a branch**.
-4. Wybierz branch `main` oraz folder `/ (root)), a następnie kliknij **Save**.
-5. Po zakończeniu wdrożenia GitHub pokaże adres strony w sekcji Pages.
+Obecna wersja zawiera interfejs logowania i rejestracji. Formularze są tylko makietą — nie zapisują haseł i nie uwierzytelniają użytkowników. Do prawdziwych kont potrzebny jest backend lub dostawca uwierzytelniania (np. Supabase albo Firebase), konfiguracja projektu i bezpieczne reguły dostępu.
 
-Strona jest statyczna i na tym etapie nie zawiera jeszcze działającego modelu AI ani API.
+## Domena
+
+Domena `purplecreator.pl` wymaga osobnej konfiguracji DNS oraz ustawienia domeny niestandardowej u wybranego hostingu. Samo dodanie plików do GitHuba nie zmienia rekordów DNS.
