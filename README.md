@@ -1,15 +1,22 @@
 # PurpleCreator
 
-Strona startowa PurpleCreator z fioletowo-czarnym motywem oraz widokami logowania i rejestracji.
+Panel PurpleCreator Studio z motywem czarno-fioletowym.
+
+## Sekcje
+- Połącz Hugging Face — ekran integracji i statusu (domyślnie Offline).
+- Create model AI — formularz konfiguracji modelu, sprzętu i liczby przykładów.
+- Czat — lista utworzonych projektów i makieta rozmowy.
+- API — pusta sekcja przygotowana na później.
 
 ## Uruchomienie
+Otwórz `index.html` w przeglądarce albo opublikuj repozytorium przez hosting statyczny.
 
-Otwórz `index.html` w przeglądarce albo opublikuj repozytorium przez GitHub Pages.
+## Ważne ograniczenia obecnej wersji
+- Logowanie i rejestracja są tylko demonstracją interfejsu. Nie ma jeszcze prawdziwego systemu kont.
+- Hugging Face OAuth nie jest jeszcze podłączony. Przycisk prowadzi do strony logowania HF, ale nie autoryzuje PurpleCreator. Status pozostaje Offline, dopóki nie powstanie backend OAuth.
+- Czat jest makietą i nie łączy się jeszcze z modelem.
+- Generator skryptu jest szablonem fine-tuningu. Wymaga prawdziwego ID datasetu i lokalnego logowania poleceniem `hf auth login`. Nie pobiera nieistniejącego, uniwersalnego zbioru 3 bilionów pytań i odpowiedzi.
+- Limit startowy wynosi 40 000 przykładów. Możliwość treningu zależy od GPU/VRAM, RAM, modelu bazowego i danych.
 
-## Ważne: system kont
-
-Obecna wersja zawiera interfejs logowania i rejestracji. Formularze są tylko makietą — nie zapisują haseł i nie uwierzytelniają użytkowników. Do prawdziwych kont potrzebny jest backend lub dostawca uwierzytelniania (np. Supabase albo Firebase), konfiguracja projektu i bezpieczne reguły dostępu.
-
-## Domena
-
-Domena `purplecreator.pl` wymaga osobnej konfiguracji DNS oraz ustawienia domeny niestandardowej u wybranego hostingu. Samo dodanie plików do GitHuba nie zmienia rekordów DNS.
+## Następne wymagane prace
+Do produkcyjnego uruchomienia należy dodać backend, bezpieczne konta, OAuth Hugging Face, przechowywanie projektów, endpoint czatu oraz publikację API. Nie przechowuj tokenów HF ani haseł w kodzie frontendu.
