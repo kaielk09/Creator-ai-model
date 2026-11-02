@@ -1,48 +1,61 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#090812">
-  <meta name="description" content="Creator AI Model — centrum projektu i informacji o modelu AI.">
-  <title>Creator AI Model</title>
-  <style>
-    :root{color-scheme:dark;--bg:#090812;--panel:#121020;--line:#29233f;--purple:#9b6cff;--text:#f6f2ff;--muted:#aaa3bd}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#302052 0,transparent 55%),var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
-    .wrap{width:min(1060px,calc(100% - 36px));margin:auto}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}
-    .brand{font-weight:750;letter-spacing:.2px}.brand span{color:var(--purple)}.tag{font-size:12px;color:#d5c5ff;border:1px solid #7251a7;border-radius:99px;padding:5px 10px}
-    main{padding:90px 0 70px;text-align:center}.eyebrow{color:#c3a7ff;text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:700}
-    h1{font-size:clamp(42px,8vw,76px);line-height:1.05;letter-spacing:-3px;margin:18px 0}h1 span{color:var(--purple)}
-    .lead{max-width:650px;margin:0 auto;color:var(--muted);font-size:18px}
-    .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
-    a.btn{display:inline-block;text-decoration:none;padding:12px 19px;border-radius:12px;font-weight:700}
-    .primary{background:var(--purple);color:#130c20}.secondary{border:1px solid var(--line);color:var(--text);background:#ffffff08}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0 80px}.card{background:linear-gradient(145deg,#171329,#100e1b);border:1px solid var(--line);border-radius:18px;padding:23px;text-align:left}
-    .symbol{width:38px;height:38px;display:grid;place-items:center;background:#9b6cff20;color:#c5a9ff;border-radius:11px;font-weight:800}
-    h2{font-size:19px;margin:17px 0 7px}.card p{margin:0;color:var(--muted);font-size:14px}
-    .status{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;justify-content:center;margin-top:34px}.dot{width:8px;height:8px;border-radius:50%;background:#a58bca}
-    footer{border-top:1px solid #ffffff12;padding:24px 0;color:#817a92;font-size:13px;text-align:center}
-    @media(max-width:700px){main{padding:65px 0 50px}.grid{grid-template-columns:1fr;margin-bottom:55px}h1{letter-spacing:-2px}.lead{font-size:16px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09070f">
+<meta name="description" content="PurpleCreator — kreatywna przestrzeń do tworzenia projektów.">
+<title>PurpleCreator</title>
+<style>
+:root{color-scheme:dark;--bg:#09070f;--panel:#14101e;--panel2:#1b1528;--line:#30243f;--purple:#9b5cff;--purple2:#7138d5;--text:#f7f2ff;--muted:#a79bb8;--green:#9ce6bd}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 18% 12%,#32165b66,transparent 38%),radial-gradient(ellipse at 88% 85%,#27104455,transparent 35%),var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+button,input{font:inherit}.shell{max-width:1180px;margin:auto;padding:0 30px}.top{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:18px;letter-spacing:.3px}.mark{width:37px;height:37px;border-radius:12px;background:linear-gradient(145deg,#b47bff,#6424c5);display:grid;place-items:center;box-shadow:0 8px 30px #8e4ce64a;font-weight:900}.logo span{color:#b98cff}.top-note{color:var(--muted);font-size:13px}
+.layout{min-height:calc(100vh - 83px);display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:center;padding-top:50px;padding-bottom:65px}
+.hero{padding:15px 0}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#c7a6ff;border:1px solid #7c4bb54d;background:#9b5cff12;padding:7px 12px;border-radius:99px;font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase}.spark{width:7px;height:7px;background:#b78bff;border-radius:50%;box-shadow:0 0 13px #b78bff}
+h1{font-size:clamp(43px,6vw,68px);line-height:1.04;letter-spacing:-3px;margin:24px 0 18px}h1 span{background:linear-gradient(90deg,#c69aff,#8950ec);-webkit-background-clip:text;background-clip:text;color:transparent}.intro{max-width:500px;color:var(--muted);font-size:17px}
+.points{display:grid;gap:14px;margin-top:35px}.point{display:flex;gap:12px;align-items:center;color:#d8cfe4}.tick{width:25px;height:25px;display:grid;place-items:center;border:1px solid #8252b7;border-radius:8px;color:#c39aff;background:#9b5cff15;font-size:13px}
+.auth{width:100%;max-width:450px;justify-self:end;padding:30px;background:linear-gradient(145deg,#1a1426f5,#100d18f5);border:1px solid #49345f;border-radius:23px;box-shadow:0 28px 90px #0008,0 0 55px #873fe51c}
+.auth-head{margin-bottom:23px}.auth-head h2{font-size:25px;letter-spacing:-.6px;margin:0 0 5px}.auth-head p{margin:0;color:var(--muted);font-size:14px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;padding:5px;background:#0c0912;border:1px solid #30243e;border-radius:12px;margin-bottom:23px}.tab{border:0;border-radius:9px;padding:10px;background:transparent;color:var(--muted);font-weight:650;cursor:pointer}.tab.active{background:linear-gradient(110deg,#8446df,#a15cff);color:white;box-shadow:0 5px 18px #8d45d533}
+.field{display:block;margin:15px 0}.field span{display:block;color:#d8cde5;font-size:13px;margin-bottom:7px}.field input{width:100%;height:48px;border:1px solid #3a2e49;border-radius:11px;background:#0d0a13;color:white;padding:0 14px;outline:none;transition:.2s}.field input:focus{border-color:#a56aff;box-shadow:0 0 0 3px #9b5cff20}.field input::placeholder{color:#746a80}
+.rowline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:13px 0 19px;font-size:12px;color:var(--muted)}.remember{display:flex;align-items:center;gap:7px}.remember input{accent-color:#9b5cff}.textlink{color:#c39aff;text-decoration:none}.submit{width:100%;height:49px;border:0;border-radius:11px;color:white;font-weight:750;background:linear-gradient(100deg,#7138d5,#a45cff);box-shadow:0 9px 25px #8b42d43a;cursor:pointer}.submit:active{transform:translateY(1px)}.fine{color:#81768f;font-size:11px;text-align:center;margin:17px 0 0}.notice{display:none;margin-top:14px;padding:11px 12px;border:1px solid #7852a4;background:#9b5cff14;border-radius:10px;color:#d9c5ff;font-size:12px}.notice.show{display:block}.foot{text-align:center;color:#776d84;font-size:12px;padding:0 0 25px}
+@media(max-width:850px){.layout{grid-template-columns:1fr;gap:28px;padding-top:42px}.hero{padding:0}.auth{justify-self:center;max-width:520px}.intro{max-width:620px}.points{grid-template-columns:1fr 1fr}h1{font-size:52px}}
+@media(max-width:520px){.shell{padding:0 18px}.top{height:70px}.top-note{font-size:11px}.layout{padding-top:35px;gap:28px}.hero{padding:0 2px}h1{font-size:43px;letter-spacing:-2px}.intro{font-size:15px}.points{grid-template-columns:1fr;gap:10px}.auth{padding:23px 19px;border-radius:18px}.auth-head h2{font-size:23px}}
+</style>
 </head>
 <body>
-  <header class="wrap nav"><div class="brand">CREATOR <span>AI</span> MODEL</div><div class="tag">Wczesny projekt</div></header>
-  <main class="wrap">
-    <div class="eyebrow">Nowy projekt AI</div>
-    <h1>Poznaj <span>Creator AI</span></h1>
-    <p class="lead">Projekt własnego modelu sztucznej inteligencji. To miejsce będzie centrum informacji, rozwoju i przyszłych wersji Creator AI Model.</p>
-    <div class="actions">
-      <a class="btn primary" href="#about">Poznaj projekt</a>
-      <a class="btn secondary" href="https://github.com/kaielk09/Creator-ai-model" target="_blank" rel="noopener">Zobacz repozytorium ↗</a>
-    </div>
-    <div class="status"><span class="dot"></span> Projekt w budowie · Więcej informacji wkrótce</div>
-  </main>
-  <section class="wrap grid" id="about">
-    <article class="card"><div class="symbol">AI</div><h2>Własny model</h2><p>Celem projektu jest rozwój niezależnego modelu AI i jego możliwości.</p></article>
-    <article class="card"><div class="symbol">01</div><h2>Rozwój krok po kroku</h2><p>Strona będzie aktualizowana wraz z postępami prac i kolejnymi wersjami.</p></article>
-    <article class="card"><div class="symbol">⌘</div><h2>Otwarte informacje</h2><p>Kod źródłowy i dokumentacja projektu będą dostępne w repozytorium GitHub.</p></article>
-  </section>
-  <footer><div class="wrap">© <span id="year"></span> Creator AI Model · Projekt niezależny</div></footer>
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
-</body>
-</html>
+<header class="shell top"><div class="logo"><div class="mark">P</div><div>PURPLE<span>CREATOR</span></div></div><div class="top-note">Twoja kreatywna przestrzeń</div></header>
+<main class="shell layout">
+<section class="hero">
+<div class="eyebrow"><i class="spark"></i> Nowy wymiar tworzenia</div>
+<h1>Twórz więcej.<br>Twórz z <span>PurpleCreator.</span></h1>
+<p class="intro">Jedno miejsce na Twoje pomysły, projekty i kreatywne możliwości. Zaloguj się lub utwórz konto, aby rozpocząć.</p>
+<div class="points">
+<div class="point"><span class="tick">✓</span> Twoje projekty w jednym miejscu</div>
+<div class="point"><span class="tick">✓</span> Przejrzysty panel użytkownika</div>
+<div class="point"><span class="tick">✓</span> Nowoczesny, wygodny interfejs</div>
+</div>
+</section>
+<section class="auth" aria-label="Logowanie i rejestracja">
+<div class="auth-head"><h2 id="formTitle">Witaj ponownie</h2><p id="formSubtitle">Zaloguj się do swojego konta PurpleCreator.</p></div>
+<div class="tabs" role="tablist"><button class="tab active" id="loginTab" type="button">Logowanie</button><button class="tab" id="registerTab" type="button">Rejestracja</button></div>
+<form id="authForm">
+<div id="nameField" class="field" hidden><span for="fullName">Nazwa użytkownika</span><input id="fullName" name="fullName" autocomplete="nickname" placeholder="Jak mamy Cię nazywać?"></div>
+<label class="field"><span>Adres e-mail</span><input type="email" name="email" autocomplete="email" placeholder="ty@example.com" required></label>
+<label class="field"><span>Hasło</span><input type="password" name="password" autocomplete="current-password" placeholder="Wpisz hasło" minlength="8" required></label>
+<div class="rowline" id="loginExtras"><label class="remember"><input type="checkbox"> Zapamiętaj mnie</label><a class="textlink" href="#" id="forgot">Nie pamiętasz hasła?</a></div>
+<button class="submit" id="submitBtn" type="submit">Zaloguj się</button>
+<div class="notice" id="notice" role="status">To jest na razie projekt interfejsu. Logowanie i rejestracja nie są jeszcze podłączone do bezpiecznego serwera, więc dane nie zostały wysłane ani zapisane.</div>
+</form>
+<p class="fine">Kontynuując, akceptujesz przyszłe zasady korzystania z PurpleCreator.</p>
+</section>
+</main>
+<footer class="shell foot">© <span id="year"></span> PurpleCreator · Wszystkie prawa zastrzeżone</footer>
+<script>
+const loginTab=document.getElementById('loginTab'),registerTab=document.getElementById('registerTab'),nameField=document.getElementById('nameField'),extras=document.getElementById('loginExtras'),title=document.getElementById('formTitle'),subtitle=document.getElementById('formSubtitle'),submit=document.getElementById('submitBtn'),notice=document.getElementById('notice'),password=document.querySelector('input[name="password"]');
+let mode='login';
+function setMode(next){mode=next;const registering=mode==='register';loginTab.classList.toggle('active',!registering);registerTab.classList.toggle('active',registering);nameField.hidden=!registering;extras.hidden=registering;title.textContent=registering?'Utwórz konto':'Witaj ponownie';subtitle.textContent=registering?'Dołącz do PurpleCreator i zacznij tworzyć.':'Zaloguj się do swojego konta PurpleCreator.';submit.textContent=registering?'Utwórz konto':'Zaloguj się';password.autocomplete=registering?'new-password':'current-password';notice.classList.remove('show')}
+loginTab.addEventListener('click',()=>setMode('login'));registerTab.addEventListener('click',()=>setMode('register'));
+document.getElementById('authForm').addEventListener('submit',e=>{e.preventDefault();notice.classList.add('show')});
+document.getElementById('forgot').addEventListener('click',e=>{e.preventDefault();notice.textContent='Odzyskiwanie hasła zostanie dodane po podłączeniu systemu kont.';notice.classList.add('show')});
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body></html>
