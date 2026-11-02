@@ -25,8 +25,8 @@
 <section id="loginScreen" class="login-screen">
  <div class="login-brand"><div class="brand"><span class="mark">P</span>PURPLE<b>CREATOR</b></div><h1>Twoje pomysły.<br><span>Twoje AI.</span></h1><p>Studio do łączenia konta Hugging Face, przygotowywania modeli i rozmów z własnymi projektami AI.</p></div>
  <div class="login-card"><h2 id="authTitle">Witaj ponownie</h2><p class="muted" id="authSub">Zaloguj się do swojego panelu.</p><div class="tabs"><button id="tabLogin" class="active">Logowanie</button><button id="tabRegister">Rejestracja</button></div>
- <form id="authForm"><label class="field" id="nameWrap" hidden><span>Nazwa użytkownika</span><input id="authName" placeholder="Twoja nazwa"></label><label class="field"><span>E-mail</span><input type="email" required placeholder="ty@example.com"></label><label class="field"><span>Hasło</span><input type="password" required minlength="8" placeholder="Minimum 8 znaków"></label><button class="btn" style="width:100%" id="authSubmit">Zaloguj się</button></form>
- <p class="tiny" style="margin-top:15px">Podgląd interfejsu. Prawdziwe konta wymagają podłączenia backendu — formularz nie zapisuje haseł.</p><button class="btn secondary" id="demoEnter" style="width:100%;margin-top:8px">Wejdź do podglądu panelu</button></div>
+ <form id="authForm"><label class="field" id="nameWrap" hidden><span>Nazwa użytkownika</span><input id="authName" name="name" autocomplete="nickname" placeholder="Twoja nazwa"></label><label class="field"><span>E-mail</span><input id="authEmail" type="email" required autocomplete="email" placeholder="ty@example.com"></label><label class="field"><span>Hasło</span><input id="authPassword" type="password" required minlength="10" autocomplete="current-password" placeholder="Minimum 10 znaków"></label><button class="btn" style="width:100%" id="authSubmit">Zaloguj się</button></form>
+ <p class="tiny" style="margin-top:15px">Podgląd interfejsu. Prawdziwe konta wymagają podłączenia backendu — formularz nie zapisuje haseł.</p><p class="tiny" id="authMessage" role="status"></p></div>
 </section>
 <div id="app" class="app hidden">
 <aside class="sidebar"><div class="side-brand"><span class="mark">P</span><span class="brand brandtext">PURPLE<b>CREATOR</b></span></div><div class="side-label">Workspace</div>
@@ -53,99 +53,76 @@
 <section class="view" id="view-api"><div class="empty"><div class="symbol">⌘</div><strong>API</strong><p>Ta sekcja jest na razie pusta — zgodnie z planem.</p></div></section>
 </main></div>
 <div class="modal-back" id="createModal"><div class="modal"><div class="modal-head"><div><span class="badge">NOWY PROJEKT</span><h2 style="margin:9px 0 0">Create model AI</h2></div><button class="close" id="closeCreate">✕</button></div><form id="createForm"><label class="field"><span>Nazwa modelu</span><input id="modelName" required maxlength="48" placeholder="np. Purple AI V1"></label>
-<div class="form-grid"><label class="field"><span>Karta graficzna</span><select id="gpu"><option value="RTX 5090">NVIDIA RTX 5090</option><option value="RTX 4090">NVIDIA RTX 4090</option><option value="RTX 4080">NVIDIA RTX 4080</option><option value="RTX 4070">NVIDIA RTX 4070</option><option value="RTX 4060">NVIDIA RTX 4060</option><option value="RTX 3060">NVIDIA RTX 3060</option><option value="Inna / zintegrowana">Inna / zintegrowana</option></select></label><label class="field"><span>Typ urządzenia</span><select id="device"><option value="desktop">Komputer stacjonarny</option><option value="laptop">Laptop</option></select></label><label class="field"><span>Pamięć RAM</span><select id="ram"><option>8</option><option selected>16</option><option>32</option><option>64</option><option>128</option></select></label><label class="field"><span>Model bazowy (Hugging Face ID)</span><input id="baseModel" value="Qwen/Qwen2.5-0.5B-Instruct" placeholder="organizacja/model"></label></div>
+<div class="form-grid"><label class="field"><span>Karta graficzna</span><select id="gpu"><option value="RTX 5090">NVIDIA RTX 5090</option><option value="RTX 4090">NVIDIA RTX 4090</option><option value="RTX 4080">NVIDIA RTX 4080</option><option value="RTX 4070">NVIDIA RTX 4070</option><option value="RTX 4060">NVIDIA RTX 4060</option><option value="RTX 3060">NVIDIA RTX 3060</option><option value="Inna / zintegrowana">Inna / zintegrowana</option></select></label><label class="field"><span>Typ urządzenia</span><select id="device"><option value="desktop">Komputer stacjonarny</option><option value="laptop">Laptop</option></select></label><label class="field"><span>Pamięć RAM</span><select id="ram"><option>8</option><option selected>16</option><option>32</option><option>64</option><option>128</option></select></label><label class="field"><span>Model bazowy (Hugging Face ID)</span><input id="baseModel" value="Qwen/Qwen2.5-0.5B-Instruct" placeholder="organizacja/model"></label><label class="field"><span>Dataset (Hugging Face ID)</span><input id="datasetId" value="JohnTdi/bielik-distill-polish-10k" placeholder="autor/nazwa-zbioru"></label></div>
 <div class="range-line"><span>Liczba przykładów treningowych</span><strong id="examplesValue">40 000</strong></div><input class="range" id="examples" type="range" min="40000" max="200000" step="10000" value="40000"><div class="hint" id="hardwareHint">Startowa konfiguracja: 40 000 przykładów. Rzeczywisty czas zależy od modelu, GPU, VRAM, RAM i datasetu.</div>
 <button class="btn" style="width:100%" type="submit">Dalej — sprawdź połączenie</button></form></div></div>
 <div class="modal-back" id="scriptModal"><div class="modal"><div class="modal-head"><div><span class="badge">SKRYPT TRENINGOWY</span><h2 id="scriptTitle" style="margin:9px 0">Twój model</h2></div><button class="close" id="closeScript">✕</button></div><p class="muted">Skopiuj skrypt na komputerze. Przed treningiem ustaw ID datasetu i sprawdź jego licencję oraz format danych. Skrypt nie pobiera fikcyjnego zbioru 3 bilionów przykładów.</p><pre class="code" id="scriptCode"></pre><button class="btn" id="copyScript">Kopiuj skrypt</button><p class="tiny">Do działania wymagane jest konto Hugging Face zalogowane lokalnie przez <code>hf auth login</code>. Nie umieszczaj tokenu w skrypcie.</p></div></div>
-<script>
-const $=id=>document.getElementById(id);let authMode='login',models=[],selected=null;
-function setAuth(m){authMode=m;$('tabLogin').classList.toggle('active',m==='login');$('tabRegister').classList.toggle('active',m==='register');$('nameWrap').hidden=m!=='register';$('authTitle').textContent=m==='login'?'Witaj ponownie':'Utwórz konto';$('authSub').textContent=m==='login'?'Zaloguj się do swojego panelu.':'Dołącz do PurpleCreator.';$('authSubmit').textContent=m==='login'?'Zaloguj się':'Utwórz konto'}
-$('tabLogin').onclick=()=>setAuth('login');$('tabRegister').onclick=()=>setAuth('register');
-function enter(){ $('loginScreen').classList.add('hidden');$('app').classList.remove('hidden') }
-$('demoEnter').onclick=enter;$('authForm').onsubmit=e=>{e.preventDefault();alert('To jest tylko podgląd. Prawdziwe logowanie nie jest jeszcze podłączone. Możesz wejść do demonstracyjnego panelu przyciskiem poniżej.');};$('logout').onclick=()=>{$('app').classList.add('hidden');$('loginScreen').classList.remove('hidden')};
-const titles={connect:['Połącz Hugging Face','Zarządzaj połączeniem ze swoim kontem model hub.'],create:['Create model AI','Konfiguruj i przygotuj trening własnego modelu.'],chat:['Czat','Rozmawiaj ze swoimi modelami AI.'],api:['API','Integracje i dostęp programistyczny.']};
-document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('view-'+b.dataset.view).classList.add('active');$('pageTitle').textContent=titles[b.dataset.view][0];$('pageSub').textContent=titles[b.dataset.view][1]});
-$('hfConnect').onclick=()=>window.open('https://huggingface.co/login','_blank','noopener');
-$('openCreate').onclick=()=>{if(!models.length){$('createModal').classList.add('open')}else $('createModal').classList.add('open')};$('closeCreate').onclick=()=>$('createModal').classList.remove('open');$('closeScript').onclick=()=>$('scriptModal').classList.remove('open');
-$('examples').oninput=()=>{$('examplesValue').textContent=Number($('examples').value).toLocaleString('pl-PL');};
-$('ram').onchange=$('gpu').onchange=()=>{$('hardwareHint').textContent='Wybrano '+$('gpu').value+' ('+($('device').value==='laptop'?'laptop':'komputer stacjonarny')+') i '+$('ram').value+' GB RAM. Sprawdź szczególnie VRAM karty; RAM systemowy nie zastępuje pamięci GPU.'};
-function makeScript(m){return `# PurpleCreator — konfiguracja treningu
-# 1) Zainstaluj Python 3.10+ i sterowniki CUDA zgodne z PyTorch.
-# 2) W CMD: py -m venv .venv && .venv\\Scripts\\activate
-# 3) pip install torch transformers datasets accelerate huggingface_hub
-# 4) hf auth login
-#
-# Ustaw prawdziwe ID datasetu. Dataset musi zawierać kolumnę "text"
-# albo pary "question"/"answer". Sprawdź licencję i jakość danych.
-# To jest szablon fine-tuningu, nie trening od zera.
-
-import os
-import torch
-from datasets import load_dataset
-from transformers import (
-    AutoTokenizer, AutoModelForCausalLM, Trainer,
-    TrainingArguments, DataCollatorForLanguageModeling
-)
-
-MODEL_NAME = ${JSON.stringify(m.base)}
-DATASET_ID = "WPISZ_ID_DATASETU_HUGGING_FACE"
-DATASET_SPLIT = "train"
-OUTPUT_REPO = ${JSON.stringify(m.name.toLowerCase().replace(/[^a-z0-9-]+/g,"-"))}
-MAX_EXAMPLES = ${m.examples}  # ustawione w PurpleCreator
-MAX_LENGTH = 512
-
-if DATASET_ID.startswith("WPISZ_"):
-    raise SystemExit("Najpierw wpisz prawdziwe DATASET_ID.")
-
-print("Urządzenie:", "CUDA" if torch.cuda.is_available() else "CPU")
-if torch.cuda.is_available():
-    print("GPU:", torch.cuda.get_device_name(0))
-
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-if tokenizer.pad_token is None:
-    tokenizer.pad_token = tokenizer.eos_token
-
-model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
-raw = load_dataset(DATASET_ID, split=DATASET_SPLIT)
-raw = raw.select(range(min(len(raw), MAX_EXAMPLES)))
-
-def to_text(row):
-    if "text" in row and row["text"]:
-        return {"text": str(row["text"])}
-    if "question" in row and "answer" in row:
-        return {"text": "Pytanie: " + str(row["question"]) + "\\nOdpowiedź: " + str(row["answer"])}
-    raise ValueError("Dataset musi mieć kolumnę text albo question i answer.")
-
-raw = raw.map(to_text)
-def tokenize(batch):
-    return tokenizer(batch["text"], truncation=True, max_length=MAX_LENGTH)
-train_data = raw.map(tokenize, batched=True, remove_columns=raw.column_names)
-collator = DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False)
-
-args = TrainingArguments(
-    output_dir="./purplecreator-training",
-    num_train_epochs=1,
-    per_device_train_batch_size=1,
-    gradient_accumulation_steps=8,
-    learning_rate=2e-5,
-    logging_steps=20,
-    save_steps=200,
-    save_total_limit=2,
-    fp16=torch.cuda.is_available(),
-    report_to="none",
-    push_to_hub=True,
-    hub_model_id=OUTPUT_REPO,
-)
-trainer = Trainer(model=model, args=args, train_dataset=train_data,
-                  tokenizer=tokenizer, data_collator=collator)
-trainer.train()
-trainer.push_to_hub()
-tokenizer.push_to_hub(OUTPUT_REPO)
-print("Gotowe. Model wysłany na Hugging Face:", OUTPUT_REPO)
-`}
-$('createForm').onsubmit=e=>{e.preventDefault();if($('hfStatus').classList.contains('online')===false){alert('Hugging Face ma status Offline. Najpierw wymagane jest prawdziwe połączenie OAuth. W tej wersji interfejsu połączenie nie jest jeszcze skonfigurowane.');return;}};
-function renderModels(){ $('noModels').classList.toggle('hidden',models.length>0);$('modelList').innerHTML='';$('chatModels').innerHTML='';models.forEach((m,i)=>{const el=document.createElement('div');el.className='model-item';el.innerHTML='<div><strong></strong><small></small></div><span class="status">Offline</span>';el.querySelector('strong').textContent=m.name;el.querySelector('small').textContent=m.gpu+' · '+m.examples.toLocaleString('pl-PL')+' przykładów';el.onclick=()=>{selected=i;$('scriptTitle').textContent=m.name;$('scriptCode').textContent=makeScript(m);$('scriptModal').classList.add('open')};$('modelList').append(el);const cm=document.createElement('div');cm.className='chat-model';cm.textContent=m.name;cm.onclick=()=>{selected=i;$('chatTitle').textContent='Czat · '+m.name;document.querySelectorAll('.chat-model').forEach(x=>x.classList.remove('active'));cm.classList.add('active')};$('chatModels').append(cm)})}
-$('copyScript').onclick=async()=>{try{await navigator.clipboard.writeText($('scriptCode').textContent);$('copyScript').textContent='Skopiowano!';}catch(e){alert('Zaznacz i skopiuj tekst skryptu ręcznie.')}};
-$('chatForm').onsubmit=e=>{e.preventDefault();if(!$('chatInput').value.trim())return;const box=document.createElement('div');box.className='bubble user';box.textContent=$('chatInput').value;$('messages').append(box);$('chatInput').value='';const reply=document.createElement('div');reply.className='bubble';reply.textContent='Czat nie jest jeszcze podłączony do działającego endpointu modelu.';$('messages').append(reply)};
-</script>
+<script>const $=id=>document.getElementById(id);
+let authMode="login",models=[],selected=null,currentUser=null;
+const api=async(url,opts={})=>{const r=await fetch(url,{credentials:"same-origin",headers:{"Content-Type":"application/json",...(opts.headers||{})},...opts});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.error||"Wystąpił błąd.");return data;};
+function showMessage(t){$("authMessage").textContent=t;}
+function setAuth(m){authMode=m;$("tabLogin").classList.toggle("active",m==="login");$("tabRegister").classList.toggle("active",m==="register");$("nameWrap").hidden=m!=="register";$("authTitle").textContent=m==="login"?"Witaj ponownie":"Utwórz konto";$("authSub").textContent=m==="login"?"Zaloguj się do swojego panelu.":"Dołącz do PurpleCreator.";$("authSubmit").textContent=m==="login"?"Zaloguj się":"Utwórz konto";$("authPassword").autocomplete=m==="login"?"current-password":"new-password";showMessage("");}
+$("tabLogin").onclick=()=>setAuth("login");$("tabRegister").onclick=()=>setAuth("register");
+function enter(user){currentUser=user;$("loginScreen").classList.add("hidden");$("app").classList.remove("hidden");const who=document.querySelector(".profile .who strong");if(who)who.textContent=user.name;refreshHF();loadModels();}
+$("authForm").onsubmit=async e=>{e.preventDefault();const payload={email:$("authEmail").value,password:$("authPassword").value,name:$("authName").value};try{const d=await api(authMode==="login"?"/api/auth/login":"/api/auth/register",{method:"POST",body:JSON.stringify(payload)});enter(d.user);}catch(err){showMessage(err.message);}};
+$("logout").onclick=async()=>{try{await api("/api/auth/logout",{method:"POST",body:"{}"});}catch(e){}location.reload();};
+const titles={connect:["Połącz Hugging Face","Zarządzaj połączeniem ze swoim kontem model hub."],create:["Create model AI","Konfiguruj i przygotuj trening własnego modelu."],chat:["Czat","Rozmawiaj ze swoimi modelami AI."],api:["API","Integracje i dostęp programistyczny."]};
+document.querySelectorAll(".navbtn").forEach(b=>b.onclick=()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".view").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("view-"+b.dataset.view).classList.add("active");$("pageTitle").textContent=titles[b.dataset.view][0];$("pageSub").textContent=titles[b.dataset.view][1];});
+$("hfConnect").onclick=()=>location.href="/auth/huggingface/start";
+async function refreshHF(){try{const d=await api("/api/huggingface/status");$("hfStatus").classList.toggle("online",d.connected);$("hfStatus").textContent=d.connected?"Active · "+d.username:"Offline";$("hfConnect").textContent=d.connected?"Połączono z Hugging Face ✓":"Połącz konto Hugging Face ↗";}catch(e){$("hfStatus").classList.remove("online");$("hfStatus").textContent="Offline";}}
+const qs=new URLSearchParams(location.search);if(qs.get("hf")){if(qs.get("hf")==="error")alert("Nie udało się połączyć Hugging Face. Sprawdź konfigurację HTTPS.");history.replaceState({},"",location.pathname);}
+$("openCreate").onclick=()=>$("createModal").classList.add("open");$("closeCreate").onclick=()=>$("createModal").classList.remove("open");$("closeScript").onclick=()=>$("scriptModal").classList.remove("open");
+$("examples").oninput=()=>$("examplesValue").textContent=Number($("examples").value).toLocaleString("pl-PL");
+$("ram").onchange=$("gpu").onchange=()=>{$("hardwareHint").textContent="Wybrano "+$("gpu").value+" ("+($("device").value==="laptop"?"laptop":"komputer stacjonarny")+") i "+$("ram").value+" GB RAM. Sprawdź VRAM karty; RAM systemowy nie zastępuje pamięci GPU.";};
+async function loadModels(){try{const d=await api("/api/models");models=d.models;renderModels();}catch(e){console.error(e);}}
+function renderModels(){$("noModels").classList.toggle("hidden",models.length>0);$("modelList").innerHTML="";$("chatModels").innerHTML="";models.forEach(m=>{const el=document.createElement("div");el.className="model-item";const left=document.createElement("div"),strong=document.createElement("strong"),small=document.createElement("small"),right=document.createElement("span");strong.textContent=m.name;small.textContent=m.gpu+" · "+Number(m.examples).toLocaleString("pl-PL")+" przykładów · "+m.hf_repo;right.className="status";right.textContent=m.status==="trained"?"Trained":"Skonfigurowany";left.append(strong,small);el.append(left,right);el.onclick=()=>openModel(m);$("modelList").append(el);const cm=document.createElement("div");cm.className="chat-model";cm.textContent=m.name;cm.onclick=()=>selectChatModel(m,cm);$("chatModels").append(cm);});}
+function openModel(m){selected=m;$("scriptTitle").textContent=m.name;$("scriptCode").textContent=makeScript(m);$("scriptModal").classList.add("open");}
+function selectChatModel(m,el){selected=m;document.querySelectorAll(".chat-model").forEach(x=>x.classList.remove("active"));el.classList.add("active");$("chatTitle").textContent="Czat · "+m.name;$("messages").innerHTML="";loadMessages(m);}
+async function loadMessages(m){try{const d=await api("/api/models/"+m.id+"/messages");d.messages.forEach(x=>appendBubble(x.role,x.content));}catch(e){appendBubble("assistant",e.message);}}
+function appendBubble(role,content){const b=document.createElement("div");b.className="bubble "+(role==="user"?"user":"");b.textContent=content;$("messages").append(b);$("messages").scrollTop=$("messages").scrollHeight;}
+$("createForm").onsubmit=async e=>{e.preventDefault();try{const d=await api("/api/models",{method:"POST",body:JSON.stringify({name:$("modelName").value,baseModel:$("baseModel").value,datasetId:$("datasetId").value,gpu:$("gpu").value,device:$("device").value,ram:Number($("ram").value),examples:Number($("examples").value)})});$("createModal").classList.remove("open");await loadModels();openModel(d.model);}catch(err){alert(err.message);}};
+function makeScript(m){const c={base:m.base_model,dataset:m.dataset_id,repo:m.hf_repo,examples:m.examples};return [
+"# PurpleCreator — lokalny fine-tuning LoRA",
+"# Python 3.10+, sterowniki NVIDIA/CUDA. Zaloguj konto poleceniem hf auth login.",
+"import torch, os",
+"from datasets import load_dataset",
+"from transformers import AutoTokenizer, AutoModelForCausalLM, TrainingArguments, Trainer, DataCollatorForLanguageModeling",
+"from peft import LoraConfig, get_peft_model",
+"from huggingface_hub import HfApi",
+"BASE_MODEL = "+JSON.stringify(c.base),
+"DATASET_ID = "+JSON.stringify(c.dataset),
+"OUTPUT_REPO = "+JSON.stringify(c.repo),
+"MAX_EXAMPLES = "+c.examples,
+"MAX_LENGTH = 512",
+"if not torch.cuda.is_available(): raise SystemExit('Nie wykryto GPU CUDA. Ten skrypt wymaga karty NVIDIA z CUDA.')",
+"print('GPU:', torch.cuda.get_device_name(0))",
+"tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)",
+"if tokenizer.pad_token is None: tokenizer.pad_token = tokenizer.eos_token",
+"model = AutoModelForCausalLM.from_pretrained(BASE_MODEL, torch_dtype=torch.float16, device_map='auto')",
+"model.gradient_checkpointing_enable()",
+"model.enable_input_require_grads()",
+"model = get_peft_model(model, LoraConfig(r=8,lora_alpha=16,target_modules=['q_proj','v_proj'],lora_dropout=0.05,bias='none',task_type='CAUSAL_LM'))",
+"data = load_dataset(DATASET_ID, split='train')",
+"data = data.select(range(min(len(data), MAX_EXAMPLES)))",
+"def format_row(row):",
+"    if row.get('text'): return {'text': str(row['text'])}",
+"    if row.get('question') is not None and row.get('answer') is not None: return {'text': 'Pytanie: '+str(row['question'])+'\\\\nOdpowiedź: '+str(row['answer'])}",
+"    raise ValueError('Dataset musi mieć kolumnę text lub question i answer.')",
+"data = data.map(format_row)",
+"def tokenize(batch): return tokenizer(batch['text'], truncation=True, max_length=MAX_LENGTH)",
+"train_data = data.map(tokenize, batched=True, remove_columns=data.column_names)",
+"args = TrainingArguments(output_dir='./purplecreator-output',num_train_epochs=1,per_device_train_batch_size=1,gradient_accumulation_steps=8,learning_rate=2e-4,logging_steps=10,save_steps=200,save_total_limit=2,fp16=True,gradient_checkpointing=True,report_to='none')",
+"trainer = Trainer(model=model,args=args,train_dataset=train_data,tokenizer=tokenizer,data_collator=DataCollatorForLanguageModeling(tokenizer=tokenizer,mlm=False))",
+"trainer.train()",
+"os.makedirs('./purplecreator-adapter',exist_ok=True)",
+"model.save_pretrained('./purplecreator-adapter'); tokenizer.save_pretrained('./purplecreator-adapter')",
+"api = HfApi(); api.create_repo(repo_id=OUTPUT_REPO,repo_type='model',exist_ok=True)",
+"api.upload_folder(folder_path='./purplecreator-adapter',repo_id=OUTPUT_REPO,repo_type='model')",
+"print('Adapter LoRA wysłany:', 'https://huggingface.co/'+OUTPUT_REPO)",
+"print('Adapter wymaga scalenia z modelem bazowym i wdrożenia endpointu, aby działał w czacie online.')"
+].join("\\n");}
+$("copyScript").onclick=async()=>{try{await navigator.clipboard.writeText($("scriptCode").textContent);$("copyScript").textContent="Skopiowano!";}catch(e){alert("Zaznacz i skopiuj skrypt ręcznie.");}};
+$("chatForm").onsubmit=async e=>{e.preventDefault();const message=$("chatInput").value.trim();if(!message)return;if(!selected){alert("Najpierw wybierz model z listy.");return;}appendBubble("user",message);$("chatInput").value="";try{const d=await api("/api/models/"+selected.id+"/chat",{method:"POST",body:JSON.stringify({message})});appendBubble("assistant",d.answer);}catch(err){appendBubble("assistant",err.message);}};
+async function boot(){try{const d=await api("/api/auth/me");if(d.user)enter(d.user);}catch(e){console.error(e);}}
+boot();</script>
 </body></html>
