@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090812">
+  <meta name="description" content="Creator AI Model — centrum projektu i informacji o modelu AI.">
+  <title>Creator AI Model</title>
+  <style>
+    :root{color-scheme:dark;--bg:#090812;--panel:#121020;--line:#29233f;--purple:#9b6cff;--text:#f6f2ff;--muted:#aaa3bd}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#302052 0,transparent 55%),var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+    .wrap{width:min(1060px,calc(100% - 36px));margin:auto}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}
+    .brand{font-weight:750;letter-spacing:.2px}.brand span{color:var(--purple)}.tag{font-size:12px;color:#d5c5ff;border:1px solid #7251a7;border-radius:99px;padding:5px 10px}
+    main{padding:90px 0 70px;text-align:center}.eyebrow{color:#c3a7ff;text-transform:uppercase;letter-spacing:3px;font-size:12px;font-weight:700}
+    h1{font-size:clamp(42px,8vw,76px);line-height:1.05;letter-spacing:-3px;margin:18px 0}h1 span{color:var(--purple)}
+    .lead{max-width:650px;margin:0 auto;color:var(--muted);font-size:18px}
+    .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+    a.btn{display:inline-block;text-decoration:none;padding:12px 19px;border-radius:12px;font-weight:700}
+    .primary{background:var(--purple);color:#130c20}.secondary{border:1px solid var(--line);color:var(--text);background:#ffffff08}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0 80px}.card{background:linear-gradient(145deg,#171329,#100e1b);border:1px solid var(--line);border-radius:18px;padding:23px;text-align:left}
+    .symbol{width:38px;height:38px;display:grid;place-items:center;background:#9b6cff20;color:#c5a9ff;border-radius:11px;font-weight:800}
+    h2{font-size:19px;margin:17px 0 7px}.card p{margin:0;color:var(--muted);font-size:14px}
+    .status{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:13px;justify-content:center;margin-top:34px}.dot{width:8px;height:8px;border-radius:50%;background:#a58bca}
+    footer{border-top:1px solid #ffffff12;padding:24px 0;color:#817a92;font-size:13px;text-align:center}
+    @media(max-width:700px){main{padding:65px 0 50px}.grid{grid-template-columns:1fr;margin-bottom:55px}h1{letter-spacing:-2px}.lead{font-size:16px}}
+  </style>
+</head>
+<body>
+  <header class="wrap nav"><div class="brand">CREATOR <span>AI</span> MODEL</div><div class="tag">Wczesny projekt</div></header>
+  <main class="wrap">
+    <div class="eyebrow">Nowy projekt AI</div>
+    <h1>Poznaj <span>Creator AI</span></h1>
+    <p class="lead">Projekt własnego modelu sztucznej inteligencji. To miejsce będzie centrum informacji, rozwoju i przyszłych wersji Creator AI Model.</p>
+    <div class="actions">
+      <a class="btn primary" href="#about">Poznaj projekt</a>
+      <a class="btn secondary" href="https://github.com/kaielk09/Creator-ai-model" target="_blank" rel="noopener">Zobacz repozytorium ↗</a>
+    </div>
+    <div class="status"><span class="dot"></span> Projekt w budowie · Więcej informacji wkrótce</div>
+  </main>
+  <section class="wrap grid" id="about">
+    <article class="card"><div class="symbol">AI</div><h2>Własny model</h2><p>Celem projektu jest rozwój niezależnego modelu AI i jego możliwości.</p></article>
+    <article class="card"><div class="symbol">01</div><h2>Rozwój krok po kroku</h2><p>Strona będzie aktualizowana wraz z postępami prac i kolejnymi wersjami.</p></article>
+    <article class="card"><div class="symbol">⌘</div><h2>Otwarte informacje</h2><p>Kod źródłowy i dokumentacja projektu będą dostępne w repozytorium GitHub.</p></article>
+  </section>
+  <footer><div class="wrap">© <span id="year"></span> Creator AI Model · Projekt niezależny</div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+</body>
+</html>
