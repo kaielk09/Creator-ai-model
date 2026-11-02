@@ -223,6 +223,6 @@ app.post("/api/models/:id/chat", requireAuth, async (req, res) => {
   }
 });
 app.get("/api/health", (req, res) => res.json({ ok: true, service: "PurpleCreator", version: "1.0.0" }));
-app.use(express.static(__dirname));
-app.get("*", (req, res) => res.sendFile(path.join(__dirname, "index.html")));
+app.use(express.static(path.join(__dirname, "public")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "public", "index.html")));
 app.listen(PORT, () => console.log("PurpleCreator running on port " + PORT));
